@@ -43,7 +43,7 @@ This process ensured that only meaningful and focused data was included, reducin
 
 Damage Per Minute (DPM) Distribution
 
-The histogram below shows the distribution of Damage Per Minute (DPM) across games, categorized by leagues (LCK, LPL, LEC, and LCS). It provides a visual representation of how “action-packed” games are in each league. Observing the plot, we see that most games cluster around a DPM of 3000–5000, indicating relatively high engagement. The LPL and LCS leagues show a slight skew towards higher DPM values, suggesting more action-packed gameplay compared to other tier-one leagues.
+The histogram below shows the distribution of Damage Per Minute (DPM) across games, categorized by leagues (LCK, LPL, LEC, and LCS). It provides a visual representation of how “action-packed” games are in each league. Observing the plot, we see that most games cluster around a DPM of 3000–5000, indicating relatively high engagement. The LPL and LCS leagues show a slight skew towards higher DPM values, suggesting more action packed gameplay compared to other tier-one leagues.
 
 <iframe src="dpm_histogram.html" width="800" height="600" frameborder="0"></iframe>
 
