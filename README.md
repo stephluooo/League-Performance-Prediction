@@ -59,6 +59,17 @@ The scatter plot below depicts the relationship between Damage per Minute (DPM) 
 
 <iframe src="scatter_dpm_kpm.html" width="800" height="600" frameborder="0"></iframe>
 
+Pivot Table
+
+This pivot table is directly relevant to the research question as it compares key metrics of “action-packed” gameplay—Damage Per Minute (DPM) and Kills Per Minute (KPM)—across the tier-one leagues (LCK, LCS, LEC, and LPL). The mean values provide insights into the average intensity of gameplay, while the maximum values highlight the potential for peak activity. Notably, the LPL leads in both mean KPM (0.84) and maximum KPM (1.90), indicating it consistently features the most high-energy and engaging games. This analysis supports the hypothesis that the LPL is the most action-packed league.
+
+|   ('mean', 'game dpm') |   ('mean', 'game kpm') |   ('max', 'game dpm') |   ('max', 'game kpm') |
+|-----------------------:|-----------------------:|----------------------:|----------------------:|
+|                3812.21 |               0.700287 |               6683.95 |                1.5611 |
+|                3896.39 |               0.733368 |               7352.5  |                1.3486 |
+|                4090.73 |               0.804023 |               6818.34 |                1.6043 |
+|                4052.46 |               0.839326 |               6840.96 |                1.9029 |
+
 
 # Assessment of Missingness
 
