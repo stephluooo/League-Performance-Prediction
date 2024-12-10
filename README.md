@@ -86,6 +86,22 @@ In contrast, the permutation test for the side column yields a p-value of 1.0, i
 
 # Hypothesis Testing
 
+Null Hypothesis (H₀): There is no difference in the mean game DPM (Damage Per Minute) between the LPL league and other tier-one leagues.
+
+Alternative Hypothesis (H₁): The LPL league has a higher mean game DPM compared to other tier-one leagues.
+
+Test Statistic: The observed difference in means for game DPM between the LPL league and other leagues. The test statistic is calculated as the mean game DPM for the LPL league minus the mean game DPM for other leagues.
+
+Significance Level (α): We use a significance level of 0.05 to evaluate the test.
+
+Permutation Test:
+
+- Procedure: The permutation test was conducted by shuffling the league labels 1,000 times to generate a null distribution of differences in means. The observed difference was compared to this null distribution to calculate the p-value.
+- Results: The observed difference in means was 148.29, and the calculated p-value was 0.0. This means that under the null hypothesis, we observed no random permutations that produced a difference in means as extreme as the observed value.
+
+Conclusion:
+Since the p-value is less than the significance level of 0.05, we reject the null hypothesis. This result suggests that the LPL league likely has a significantly higher mean game DPM compared to other tier-one leagues. While this conclusion supports the hypothesis that the LPL league’s games are more action-packed, it is important to note that this statistical test does not account for potential confounding variables that may also contribute to the observed differences. Further analysis could provide additional insights into the causes of this difference.
+
 # Framing a Prediction Problem
 
 # Baseline Model
