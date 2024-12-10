@@ -23,10 +23,10 @@ Understanding the nuances of these metrics not only helps compare the leagues bu
 The initial dataset consisted of 150,180 rows and 161 columns, which included detailed match data from various leagues. The data cleaning process involved multiple steps to focus on relevant information and ensure the data’s quality:
 
 1. Filtering Tier-One Leagues: Rows corresponding to the tier-one leagues, LPL, LCK, LEC, and LCS, were retained using the league column.
-2.	Excluding Team-Aggregated Data: Rows where the position column was set to team were excluded, as the analysis focuses on individual players.
-3.	Selecting Relevant Columns: Columns such as gameid, league, team kpm, dpm, url, and side were selected for further analysis. This step narrowed down the data to the most critical information for the project.
-4.	Aggregating Data: The data was grouped by gameid, and key metrics like team kpm and dpm were summed. The first instance of league, url, and side values within each game group was retained.
-5.	Renaming Columns: Columns were renamed for clarity, such as changing team kpm to game kpm and dpm to game dpm.
+2. Excluding Team-Aggregated Data: Rows where the position column was set to team were excluded, as the analysis focuses on individual players.
+3. Selecting Relevant Columns: Columns such as gameid, league, team kpm, dpm, url, and side were selected for further analysis. This step narrowed down the data to the most critical information for the project.
+4. Aggregating Data: The data was grouped by gameid, and key metrics like team kpm and dpm were summed. The first instance of league, url, and side values within each game group was retained.
+5. Renaming Columns: Columns were renamed for clarity, such as changing team kpm to game kpm and dpm to game dpm.
 
 The cleaned dataset, df_tier_one_filtered, now contains 1,802 rows and five columns. Below is the head of the cleaned dataset:
 
@@ -135,7 +135,7 @@ These features were selected because they provide a comprehensive representation
 
 ### Evaluation Metric
 
-The primary evaluation metric for the model is **precision**, as it is crucial to minimize the misclassification of players into incorrect roles, particularly in a competitive gaming context where such errors could have significant strategic implications. Precision is more appropriate than accuracy in this case because it focuses on the proportion of correctly predicted instances for each class relative to all predicted instances of that class.
+The primary evaluation metric for the model is **accuracy**, chosen because the dataset is relatively balanced across the different player roles. While alternative metrics like F1-score could also be useful in cases of class imbalance, accuracy provides a straightforward way to assess the overall performance of the model for this prediction problem.
 
 ### Justification
 
