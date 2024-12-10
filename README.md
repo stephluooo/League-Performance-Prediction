@@ -150,4 +150,62 @@ This baseline model sets a foundation for further development and comparison wit
 
 # Final Model
 
+Features
+
+The features used in the final model include:
+
+- Quantitative: damagetochampions, dpm, damageshare, damagetakenperminute, wardskilled, visionscore, vspm, totalgold, earnedgold, earned gpm, goldspent, wardspplaced.
+- Nominal: position (target column).
+- Ordinal: None.
+
+These features were chosen because they provide granular insights into in-game performance metrics that directly reflect player behavior in various positions.
+
+- damagetochampions and dpm measure offensive contribution, which varies significantly across positions like bot or top.
+- visionscore and wardsplaced are critical for support players (sup), enabling the distinction between roles.
+- goldspent and earned gpm provide insights into economic efficiency, which varies by position (mid tends to have higher resources).
+
+No explicit encoding was necessary for quantitative features, but nominal data (position) was inherently encoded as the target variable.
+
+Model Choice
+
+We used a K-Nearest Neighbors (KNN) classifier for its simplicity and interpretability. A pipeline was constructed to standardize the quantitative features using StandardScaler, ensuring the KNN model works efficiently with scaled data.
+
+Hyperparameter Tuning
+
+We used GridSearchCV to optimize hyperparameters, testing:
+
+- Number of neighbors (k): [3, 5, 7, 9, 11]
+- Weighting: ['uniform', 'distance']
+- Distance metric: ['minkowski', 'manhattan']
+
+The best hyperparameters identified were:
+
+- k = 11
+- Weighting: distance
+- Metric: minkowski
+
+These hyperparameters balance model complexity and performance, maximizing accuracy without overfitting.
+
+Final Model Performance
+
+- Accuracy: 0.79
+- Precision, Recall, F1-Score:
+- Best performance for sup position (F1: 0.98)
+- Lowest performance for mid position (F1: 0.57)
+- Moderate performance for bot, jng, and top.
+
+This represents a 19% improvement over the baseline model’s accuracy of 0.60.
+
+Comparison with Baseline Model
+
+- The baseline model had an accuracy of 0.60, with lower precision and recall for key positions like mid and bot.
+- Adding hyperparameter tuning and standardization improved both accuracy and the balance of metrics across classes, particularly reducing the variance in top and bot predictions.
+
+Analysis
+
+- Strengths: The final model is more accurate for sup and jng positions, reflecting their distinct playstyles and metrics.
+- Weaknesses: Predicting mid remains challenging due to its versatility and overlap with other roles in features like damage and gold.
+
+Future work could explore ensemble methods or feature engineering to improve performance further for positions like mid.
+
 # Fairness Analysis
