@@ -111,11 +111,11 @@ Model Description:
 The baseline model uses the k-Nearest Neighbors (k-NN) algorithm to predict the role (position) of players based on their in-game statistics. The following features are included:
 
 - Quantitative Features (16):
-- damagetochampions, dpm, damageshare, damagetakenperminute, wardsplaced, wpm, wardskilled, wcpm, controlwardsbought, visionscore, vspm, totalgold, earnedgold, earned gpm, earnedgoldshare, goldspent
+    - damagetochampions, dpm, damageshare, damagetakenperminute, wardsplaced, wpm, wardskilled, wcpm, controlwardsbought, visionscore, vspm, totalgold, earnedgold, earned gpm, earnedgoldshare, goldspent
 - Ordinal Features (0):
-- None.
+    - None.
 - Nominal Features (1):
-- position (target column)
+    - position (target column)
 
 The position column (target) has been stratified during the train-test split to maintain proportional representation of each class. No explicit feature encoding was required as all features are numeric.
 
@@ -132,11 +132,11 @@ Model Performance:
 Evaluation of Model Performance:
 
 - Strengths:
-- The model performs well for the support (sup) role, achieving an F1-score of 0.93. This may indicate that the features effectively differentiate this role from others.
-- High recall for the jng (jungle) role shows the model’s ability to identify this role in most cases.
+    - The model performs well for the support (sup) role, achieving an F1-score of 0.93. This may indicate that the features effectively differentiate this role from others.
+    - High recall for the jng (jungle) role shows the model’s ability to identify this role in most cases.
 - Weaknesses:
-- The model struggles with the mid, bot, and top roles, especially top, which has a low recall of 0.28. This suggests the model frequently misclassifies players in the top role.
-- The overall accuracy of 60% is moderate but leaves room for improvement, indicating that the current feature set and algorithm may not fully capture the distinctions between player roles.
+    - The model struggles with the mid, bot, and top roles, especially top, which has a low recall of 0.28. This suggests the model frequently misclassifies players in the top role.
+    - The overall accuracy of 60% is moderate but leaves room for improvement, indicating that the current feature set and algorithm may not fully capture the distinctions between player roles.
 
 Conclusion:
 
