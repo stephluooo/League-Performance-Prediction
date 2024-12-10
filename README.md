@@ -29,7 +29,7 @@ The initial dataset consisted of 150,180 rows and 161 columns, which included de
 
 The cleaned dataset, df_tier_one_filtered, now contains 1,802 rows and five columns. Below is the head of the cleaned dataset:
 
-df_tier_one_filtered.head()
+<iframe src="assets/tier_one_df.html" width="100%" height="400" frameborder="0"></iframe>
 
 This process ensured that only meaningful and focused data was included, reducing noise and enhancing the analysis’s relevance.
 
