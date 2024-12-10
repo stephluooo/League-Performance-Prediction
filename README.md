@@ -86,7 +86,7 @@ In contrast, the permutation test for the side column yields a p-value of 1.0, i
 
 # Hypothesis Testing
 
-### Null and Alternative Hypotheses:
+### Null and Alternative Hypotheses
 
 Null Hypothesis (H₀): There is no difference in the mean game DPM (Damage Per Minute) between the LPL league and other tier-one leagues.
 
@@ -96,19 +96,19 @@ Test Statistic: The observed difference in means for game DPM between the LPL le
 
 Significance Level (α): We use a significance level of 0.05 to evaluate the test.
 
-### Permutation Test:
+### Permutation Test
 
 - Procedure: The permutation test was conducted by shuffling the league labels 1,000 times to generate a null distribution of differences in means. The observed difference was compared to this null distribution to calculate the p-value.
 - Results: The observed difference in means was 148.29, and the calculated p-value was 0.0. This means that under the null hypothesis, we observed no random permutations that produced a difference in means as extreme as the observed value.
 
-### Conclusion:
+### Conclusion
 Since the p-value is less than the significance level of 0.05, we reject the null hypothesis. This result suggests that the LPL league likely has a significantly higher mean game DPM compared to other tier-one leagues. While this conclusion supports the hypothesis that the LPL league’s games are more action-packed, it is important to note that this statistical test does not account for potential confounding variables that may also contribute to the observed differences. Further analysis could provide additional insights into the causes of this difference.
 
 # Framing a Prediction Problem
 
 # Baseline Model
 
-### Model Description:
+### Model Description
 
 The baseline model uses the k-Nearest Neighbors (k-NN) algorithm to predict the role (position) of players based on their in-game statistics. The following features are included:
 
@@ -121,7 +121,7 @@ The baseline model uses the k-Nearest Neighbors (k-NN) algorithm to predict the 
 
 The position column (target) has been stratified during the train-test split to maintain proportional representation of each class. No explicit feature encoding was required as all features are numeric.
 
-### Model Performance:
+### Model Performance
 
 - Accuracy: 60%
 - Precision, Recall, F1-Score (Class-Level):
@@ -131,7 +131,7 @@ The position column (target) has been stratified during the train-test split to 
 - sup: Precision = 0.95, Recall = 0.92, F1-Score = 0.93
 - top: Precision = 0.46, Recall = 0.28, F1-Score = 0.35
 
-### Evaluation of Model Performance:
+### Evaluation of Model Performance
 
 - Strengths:
     - The model performs well for the support (sup) role, achieving an F1-score of 0.93. This may indicate that the features effectively differentiate this role from others.
@@ -140,7 +140,7 @@ The position column (target) has been stratified during the train-test split to 
     - The model struggles with the mid, bot, and top roles, especially top, which has a low recall of 0.28. This suggests the model frequently misclassifies players in the top role.
     - The overall accuracy of 60% is moderate but leaves room for improvement, indicating that the current feature set and algorithm may not fully capture the distinctions between player roles.
 
-### Conclusion:
+### Conclusion
 
 While the model demonstrates some predictive capability, especially for the sup and jng roles, its performance is uneven across roles. The current accuracy of 60% suggests that the model is a reasonable starting point but not sufficient for robust role prediction. Improvements could be made by:
 
@@ -152,7 +152,7 @@ This baseline model sets a foundation for further development and comparison wit
 
 # Final Model
 
-### Features:
+### Features
 
 - Quantitative: damagetochampions, dpm, damageshare, damagetakenperminute, wardskilled, visionscore, vspm, totalgold, earnedgold, earned gpm, goldspent, wardspplaced.
 - Nominal: position (target column).
@@ -210,28 +210,28 @@ Future work could explore ensemble methods or feature engineering to improve per
 
 # Fairness Analysis
 
-### Groups and Evaluation Metric:
+### Groups and Evaluation Metric
 
 - Group X: Players belonging to the LPL league (is_lpl = True).
 - Group Y: Players belonging to non-LPL leagues (is_lpl = False).
 - Evaluation Metric: Weighted precision score for classifying player positions.
 
-### Null and Alternative Hypotheses:
+### Null and Alternative Hypotheses
 
 - Null Hypothesis (H₀): There is no significant difference in the weighted precision score for predicting positions between Group X (LPL players) and Group Y (non-LPL players). Any observed difference is due to random chance.
 - Alternative Hypothesis (H₁): There is a significant difference in the weighted precision score for predicting positions between Group X and Group Y.
 
-### Choice of Test Statistic and Significance Level:
+### Choice of Test Statistic and Significance Level
 
 - Test Statistic: Observed difference in weighted precision scores between Group X and Group Y.
 - Significance Level (α): 0.05.
 
-### Permutation Test Results:
+### Permutation Test Results
 
 - Observed Precision Difference: 0.0157.
 - p-value: 0.1300.
 
-### Conclusion:
+### Conclusion
 Since the p-value (0.1300) is greater than the significance level (α = 0.05), we fail to reject the null hypothesis. This suggests that the observed precision difference between LPL and non-LPL groups is not statistically significant. Therefore, we cannot conclude that the model treats these groups differently in terms of precision for position classification. While there is a slight observed difference, it does not provide sufficient evidence to infer systematic bias.
 
 The weighted precision metric is appropriate for this task as it accounts for class imbalances, ensuring that the evaluation fairly reflects performance across all position categories. The permutation test is a robust choice for assessing the statistical significance of observed differences without making strong parametric assumptions.
