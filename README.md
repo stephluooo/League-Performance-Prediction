@@ -3,17 +3,14 @@ A project for DSC80 at UCSD that explores performance prediction and fairness an
 
 # Introduction
 
-This project investigates the competitive dynamics of professional esports leagues, specifically focusing on tier-one leagues, LPL, LCK, LEC, and LCS. The central question of our study is: Which tier-one league delivers the most “action-packed” games based on player performance statistics?
+As an esports enthusiast and a league player, we want to investigates the competitive dynamics of professional esports leagues for League of Legends, specifically focusing on tier-one leagues, LPL, LCK, LEC, and LCS. The central question of our study is: Which tier-one league delivers the most “action-packed” games based on player performance statistics?
 
 Our dataset comprises 18,020 rows and contains critical columns relevant to player performance and game metrics. These include:
 
+- league: The league in which the player on the team
 - position: The role of the player in the game (e.g., top, jungle, mid, bot, support).
-- damagetochampions: Total damage dealt to champions.
 - dpm: Damage per minute, a key indicator of a player’s offensive impact.
-- kmp: Kills per minute
-- damageshare: The percentage of the team’s damage output contributed by the player.
-- wardsplaced and controlwardsbought: Indicators of map vision control.
-- earnedgold and earnedgoldshare: Metrics for resources acquired during the game.
+- kpm: Kills per minute
 
 Understanding the nuances of these metrics not only helps compare the leagues but also offers insights into team dynamics and individual player contributions. This project aims to bridge the gap in data-driven esports analysis by quantifying the “action” level of games using these performance metrics. By doing so, we hope to provide valuable perspectives for both competitive gaming enthusiasts and analysts.
 
@@ -22,7 +19,7 @@ Understanding the nuances of these metrics not only helps compare the leagues bu
 
 The initial dataset consisted of 150,180 rows and 161 columns, which included detailed match data from various leagues. The data cleaning process involved multiple steps to focus on relevant information and ensure the data’s quality:
 
-1. Filtering Tier-One Leagues: Rows corresponding to the tier-one leagues, LPL, LCK, LEC, and LCS, were retained using the league column.
+1. Filtering Tier-One Leagues: Rows corresponding to the four tier-one leagues, LPL, LCK, LEC, and LCS, were retained using the league column.
 2. Excluding Team-Aggregated Data: Rows where the position column was set to team were excluded, as the analysis focuses on individual players.
 3. Selecting Relevant Columns: Columns such as gameid, league, team kpm, dpm, url, and side were selected for further analysis. This step narrowed down the data to the most critical information for the project.
 4. Aggregating Data: The data was grouped by gameid, and key metrics like team kpm and dpm were summed. The first instance of league, url, and side values within each game group was retained.
@@ -74,36 +71,50 @@ This pivot table is directly relevant to the research question as it compares ke
 
 # Assessment of Missingness
 
-The url column in the dataset is likely NMAR because the presence of a URL might depend on factors not captured in the dataset. For example, URLs may only be included for specific games or leagues that have partnerships with certain platforms or a higher level of media coverage. This missingness cannot be explained using other variables in the dataset, such as league or gameid.
+The 'url' column in the dataset is likely **NMAR** because the presence of a URL might depend on factors not captured in the dataset. For example, URLs may only be included for specific games or leagues that have partnerships with certain platforms or a higher level of media coverage. This missingness cannot be explained using other variables in the dataset, such as league or gameid.
 
-This histogram visualizes the empirical distribution of Total Variation Distance (TVD) values generated from the permutation test. The red vertical line represents the observed TVD. The observed TVD lies significantly outside the range of permuted TVD values, suggesting strong evidence against the null hypothesis.
-<iframe src="empirical_distribution.html" width="800" height="600" frameborder="0"></iframe>
+On the other hand, the 'url' column could be **MAR** dependent on the 'league' column as certain leagues might have different data collection processes, visibility standards, or reporting practices that affect the availability of URL information. 
+
+To explore whether the missingness of the ‘url’ column is dependent on the ‘league’ column, I performed a permutation test. This statistical test examines whether the observed relationship between the missingness in ‘url’ and the ‘league’ column is statistically significant, comparing the actual data to a distribution generated under the null hypothesis of no dependency. If a strong dependency is found, it would suggest that the missingness in the ‘url’ column is not random but influenced by the league.
 
 This bar graph shows the density of leagues when missing_url is True. It reveals that missing URLs are more prevalent in the LCK and LCS leagues, indicating potential systematic differences in data collection practices across leagues.
 <iframe src="true_missing.html" width="800" height="600" frameborder="0"></iframe>
 
-
 This bar graph shows the density of leagues when missing_url is False. The LPL league dominates this distribution, showing that most non-missing URLs are from the LPL league.
 <iframe src="false_missing.html" width="800" height="600" frameborder="0"></iframe>
 
-### URL Missingness and League: MAR
+### Hypothesis:
 
-The results of the permutation test indicate that the missingness in the url column is significantly associated with the league column. A p-value of 0.0 suggests that the observed dependency is not due to random chance. This dependency supports the assumption that missingness is MAR because the likelihood of a missing url depends on the league, a known and observed variable. For instance, some leagues may systematically lack certain data due to differences in data collection practices or standards, which can explain the missingness without additional unknown factors.
+Null Hypothesis (H₀): The distribution of leagues when the url column is missing is the same as the distribution of leagues when the url column is not missing.
+Alternative Hypothesis (H₁): The distribution of leagues when the url column is missing is different from the distribution of leagues when the url column is not missing.
 
-### URL Missingness and Side: NMAR
+### Test Statistic:
 
-In contrast, the permutation test for the side column yields a p-value of 1.0, indicating no evidence of dependency between url missingness and side. This finding implies that the missingness in the url column is not influenced by the side column (e.g., Blue or Red). If the missingness cannot be fully explained by any observed variable, it is considered NMAR. Additional investigation into unobserved factors or processes that could explain the missingness would be required to refine this assumption.
+Test Statistic: Total Variation Distance (TVD)
+Significance Level (α): 0.05
+
+A permutation test was chosen to assess the difference between two distributions: the league distribution when the url column is missing versus when it is not missing. The Total Variation Distance (TVD) is an appropriate metric to quantify this difference, as it measures the overall variation between two categorical distributions. The significance level of 0.05 ensures a 5% threshold for determining statistical significance.
+
+
+This histogram visualizes the empirical distribution of Total Variation Distance (TVD) values generated from the permutation test. The red vertical line represents the observed TVD. The observed TVD lies significantly outside the range of permuted TVD values, suggesting strong evidence against the null hypothesis.
+<iframe src="empirical_distribution.html" width="800" height="600" frameborder="0"></iframe>
+
+The permutation test yielded a p-value close to 0, indicating that the observed difference in the distribution of leagues when the url column is missing versus not missing is statistically significant.
+
+This result suggests that the missingness of the url column is not entirely random. Instead, the url column demonstrates a **Missing at Random (MAR)** relationship with the league column. This implies that the likelihood of a url being missing depends on the associated league.
 
 
 # Hypothesis Testing
 
 ### Null and Alternative Hypotheses
 
+During the Exploratory Data Analysis stage, we found that the LPL League has overall an higher DPM and KPM compared to other top-one tier leagues. This may indicate that LPL considers a more "action-packed" league, so we want to investigate further this observation. 
+
 Null Hypothesis (H₀): There is no difference in the mean game DPM (Damage Per Minute) between the LPL league and other tier-one leagues.
 
-Alternative Hypothesis (H₁): The LPL league has a higher mean game DPM compared to other tier-one leagues.
+Alternative Hypothesis (H₁): The LPL league has a **higher mean game DPM** compared to other tier-one leagues.
 
-Test Statistic: The observed difference in means for game DPM between the LPL league and other leagues. The test statistic is calculated as the mean game DPM for the LPL league minus the mean game DPM for other leagues.
+Test Statistic: The observed difference in means for game DPM between the LPL league and other leagues.
 
 Significance Level (α): We use a significance level of 0.05 to evaluate the test.
 
@@ -117,7 +128,7 @@ Since the p-value is less than the significance level of 0.05, we reject the nul
 
 # Framing a Prediction Problem
 
-The prediction problem aims to classify the position of a player (e.g., “top,” “jng,” “mid,” “bot,” or “sup”) based on their in-game performance statistics. This is a 	**multiclass classification problem**, as the target variable (position) has multiple categories rather than binary outcomes. The goal is to predict the role of a player based on measurable game metrics such as damage dealt, vision score, and gold spent, among others.
+As different position holds different skills and produce different stats during the game, the prediction problem aims to classify the position of a player (e.g., “top,” “jng,” “mid,” “bot,” or “sup”) based on their in-game performance statistics. This is a **multiclass classification problem**, as the target variable (position) has multiple categories rather than binary outcomes. The goal is to predict the role of a player based on measurable game metrics such as damage dealt, vision score, and gold spent, among others.
 
 ### Response Variable
 
@@ -135,11 +146,11 @@ These features were selected because they provide a comprehensive representation
 
 ### Evaluation Metric
 
-The primary evaluation metric for the model is **accuracy**, chosen because the dataset is relatively balanced across the different player roles. While alternative metrics like F1-score could also be useful in cases of class imbalance, accuracy provides a straightforward way to assess the overall performance of the model for this prediction problem.
+The primary evaluation metric for the model is **accuracy**, chosen because the dataset is relatively balanced across the different player roles，and our goal is the gather the highest proportion of correctly predicted class. While alternative metrics like F1-score could also be useful in cases of class imbalance, accuracy provides a straightforward way to assess the overall performance of the model for this prediction problem.
 
 ### Justification
 
-This problem was framed as a classification task due to the categorical nature of the target variable. The use of in-game metrics as features is justified by the strong association between these statistics and player roles. The selection of a K-Nearest Neighbors (KNN) model is appropriate for this problem because players occupying the same position are likely to exhibit similar performance patterns, forming distinct clusters in the feature space. The results of this classification task can provide valuable insights into player performance trends and can be utilized in competitive gaming analytics.
+This problem was framed as a classification task due to the categorical nature of the target variable. The use of in-game metrics as features is justified by the strong association between these statistics and player roles. The selection of a **K-Nearest Neighbors (KNN) model** is appropriate for this problem because players occupying the same position are likely to exhibit similar performance patterns, forming distinct clusters in the feature space. The results of this classification task can provide valuable insights into player performance trends and can be utilized in competitive gaming analytics.
 
 # Baseline Model
 
@@ -147,14 +158,25 @@ This problem was framed as a classification task due to the categorical nature o
 
 The baseline model uses the k-Nearest Neighbors (k-NN) algorithm to predict the role (position) of players based on their in-game statistics. The following features are included:
 
-- Quantitative Features (16):
-    - damagetochampions, dpm, damageshare, damagetakenperminute, wardsplaced, wpm, wardskilled, wcpm, controlwardsbought, visionscore, vspm, totalgold, earnedgold, earned gpm, earnedgoldshare, goldspent
+- Quantitative Features (12):
+    - damagetochampions: Total damge dealt to champions
+    - dpm: Damage per minute
+    - damageshare: Percentage of team Damge
+    - damagetakenperminute: Damage per minute
+    - visionscore: Overall vision score
+    - vspm: Vision score per minute
+    - totalgold: Total gold earned
+    - earnedgold: Earned gold
+    - earned gpm: Earned gold per minute
+    - earnedgoldshare: Percentage of gold earned
+    - goldspent: Dold spent
+    - league: The according league
 - Ordinal Features (0):
-    - None.
+    - None
 - Nominal Features (1):
     - position (target column)
 
-The position column (target) has been stratified during the train-test split to maintain proportional representation of each class. No explicit feature encoding was required as all features are numeric.
+The 12 features used in the model are quantitative and span a wide range of in-game aspects. The position column (target) has been stratified during the train-test split to maintain proportional representation of each class. By incorporating these diverse metrics, the model captures a comprehensive view of a player’s playstyle, facilitating distinct clustering based on their position.
 
 ### Model Performance
 
@@ -187,19 +209,20 @@ This baseline model sets a foundation for further development and comparison wit
 
 # Final Model
 
+**KNN Model** is used again in the final model with updated processes. 
+
 ### Features
 
-- Quantitative: damagetochampions, dpm, damageshare, damagetakenperminute, wardskilled, visionscore, vspm, totalgold, earnedgold, earned gpm, goldspent, wardspplaced.
+- Added ward metrics features based on the features from baseline model: 
+    - wardsplaced: Number of wardd
+    - wpm: Wards per minute 
+    - wardskilled: Wumber of destroyed enemy
+    - wcpm: Wards clear per minute
+    - controlwardsbought: Number of control wards bought
 - Nominal: position (target column).
 - Ordinal: None.
 
-These features were chosen because they provide granular insights into in-game performance metrics that directly reflect player behavior in various positions.
-
-- damagetochampions and dpm measure offensive contribution, which varies significantly across positions like bot or top.
-- visionscore and wardsplaced are critical for support players (sup), enabling the distinction between roles.
-- goldspent and earned gpm provide insights into economic efficiency, which varies by position (mid tends to have higher resources).
-
-No explicit encoding was necessary for quantitative features, but nominal data (position) was inherently encoded as the target variable.
+Ward metrics were added to the final model to capture critical aspects of vision control and map management, which vary significantly by role. Features including wardsplaced, wpm, wardskilled, wcpm, and controlwardsbought provide insights into a player’s contribution to team strategy and their role-specific responsibilities. These metrics help distinguish between roles, particularly support and jungler, and enhance the model’s ability to cluster players based on their in-game behavior, leading to more accurate predictions.
 
 ### Model Choice
 
@@ -219,17 +242,17 @@ The best hyperparameters identified were:
 - Weighting: distance
 - Metric: minkowski
 
-These hyperparameters balance model complexity and performance, maximizing accuracy without overfitting.
+The grid search evaluated these combinations using 5-fold cross-validation and selected the configuration that maximized accuracy on the training set. These hyperparameters balance model complexity and performance, maximizing accuracy without overfitting. 
 
 ### Final Model Performance
 
-- Accuracy: 0.79
+- Accuracy: 0.78
 - Precision, Recall, F1-Score:
 - Best performance for sup position (F1: 0.98)
 - Lowest performance for mid position (F1: 0.57)
 - Moderate performance for bot, jng, and top.
 
-This represents a 19% improvement over the baseline model’s accuracy of 0.60.
+This represents a 18% improvement over the baseline model’s accuracy of 0.60.
 
 ### Comparison with Baseline Model
 
@@ -245,6 +268,8 @@ Future work could explore ensemble methods or feature engineering to improve per
 
 # Fairness Analysis
 
+Fairness in machine learning models is crucial to ensure equitable performance across different groups in the dataset. For this analysis, we examine whether the model’s performance varies between players from the LPL league (Group X) and players from non-LPL leagues (Group Y). Using the weighted precision score as our evaluation metric, we aim to assess if the model demonstrates any systematic bias in predicting player positions for these groups. A permutation test is employed to statistically evaluate the observed difference in performance, providing insights into the fairness and reliability of the model across diverse player populations.
+
 ### Groups and Evaluation Metric
 
 - Group X: Players belonging to the LPL league (is_lpl = True).
@@ -253,8 +278,8 @@ Future work could explore ensemble methods or feature engineering to improve per
 
 ### Null and Alternative Hypotheses
 
-- Null Hypothesis (H₀): There is no significant difference in the weighted precision score for predicting positions between Group X (LPL players) and Group Y (non-LPL players). Any observed difference is due to random chance.
-- Alternative Hypothesis (H₁): There is a significant difference in the weighted precision score for predicting positions between Group X and Group Y.
+- Null Hypothesis (H₀): The model is fair. There is no significant difference in the weighted precision score for predicting positions between Group X (LPL players) and Group Y (non-LPL players). Any observed difference is due to random chance.
+- Alternative Hypothesis (H₁): The model is unfair. There is a significant difference in the weighted precision score for predicting positions between Group X (LPL players) and Group Y (non-LPL players).
 
 ### Choice of Test Statistic and Significance Level
 
