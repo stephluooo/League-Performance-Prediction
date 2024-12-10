@@ -3,13 +3,14 @@ A project for DSC80 at UCSD that explores performance prediction and fairness an
 
 # Introduction
 
-This project investigates the competitive dynamics of professional esports leagues, specifically focusing on tier-one leagues, namely the LPL, LCK, LEC, and LCS. The central question of our study is: Which tier-one league delivers the most “action-packed” games based on player performance statistics?
+This project investigates the competitive dynamics of professional esports leagues, specifically focusing on tier-one leagues, LPL, LCK, LEC, and LCS. The central question of our study is: Which tier-one league delivers the most “action-packed” games based on player performance statistics?
 
 Our dataset comprises 18,020 rows and contains critical columns relevant to player performance and game metrics. These include:
 
 - position: The role of the player in the game (e.g., top, jungle, mid, bot, support).
 - damagetochampions: Total damage dealt to champions.
 - dpm: Damage per minute, a key indicator of a player’s offensive impact.
+- kmp: Kills per minute
 - damageshare: The percentage of the team’s damage output contributed by the player.
 - wardsplaced and controlwardsbought: Indicators of map vision control.
 - earnedgold and earnedgoldshare: Metrics for resources acquired during the game.
@@ -115,6 +116,30 @@ Significance Level (α): We use a significance level of 0.05 to evaluate the tes
 Since the p-value is less than the significance level of 0.05, we reject the null hypothesis. This result suggests that the LPL league likely has a significantly higher mean game DPM compared to other tier-one leagues. While this conclusion supports the hypothesis that the LPL league’s games are more action-packed, it is important to note that this statistical test does not account for potential confounding variables that may also contribute to the observed differences. Further analysis could provide additional insights into the causes of this difference.
 
 # Framing a Prediction Problem
+
+The prediction problem aims to classify the position of a player (e.g., “top,” “jng,” “mid,” “bot,” or “sup”) based on their in-game performance statistics. This is a 	**multiclass classification problem**, as the target variable (position) has multiple categories rather than binary outcomes. The goal is to predict the role of a player based on measurable game metrics such as damage dealt, vision score, and gold spent, among others.
+
+### Response Variable
+
+The response variable for this classification task is position. This variable was chosen because it reflects a fundamental aspect of a player’s role in the game and has clear distinctions based on gameplay metrics. For example, certain roles like “mid” tend to have higher damage output, while “sup” roles are more focused on vision-related statistics.
+
+### Features
+
+The features used to predict the response variable include a variety of quantitative metrics that capture in-game player performance. These metrics include:
+
+- Damage-related features: damagetochampions, damageshare, damagetakenperminute
+- Vision-related features: wardsplaced, wpm, wardskilled, wcpw, controlwardsbought, visionscore, vspm
+- Gold-related features: totalgold, earnedgold, earned gpm, earnedgoldshare, goldspent
+
+These features were selected because they provide a comprehensive representation of a player’s contributions during a game, allowing the model to distinguish between different roles effectively.
+
+### Evaluation Metric
+
+The primary evaluation metric for the model is precision, as it is crucial to minimize the misclassification of players into incorrect roles, particularly in a competitive gaming context where such errors could have significant strategic implications. Precision is more appropriate than accuracy in this case because it focuses on the proportion of correctly predicted instances for each class relative to all predicted instances of that class.
+
+#### Justification
+
+This problem was framed as a classification task due to the categorical nature of the target variable. The use of in-game metrics as features is justified by the strong association between these statistics and player roles. The selection of a K-Nearest Neighbors (KNN) model is appropriate for this problem because players occupying the same position are likely to exhibit similar performance patterns, forming distinct clusters in the feature space. The results of this classification task can provide valuable insights into player performance trends and can be utilized in competitive gaming analytics.
 
 # Baseline Model
 
