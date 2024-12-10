@@ -56,13 +56,13 @@ This histogram depicts the Kills Per Minute (KPM) distribution across games for 
 
 ### Bivariate Analysis: DPM vs. Team KPM by League
 
-The scatter plot below depicts the relationship between Damage per Minute (DPM) and Team Kills per Minute (KPM) across the four tier-one leagues (LPL, LCK, LEC, and LCS). Points are color-coded by league, providing a visual comparison of team performance metrics. The plot reveals a clustering pattern: higher DPM values often correspond to higher KPM values, indicating more aggressive gameplay styles. Among the leagues, LPL exhibits a broader distribution in DPM and KPM, further emphasizing its fast-paced gameplay dynamics compared to others.
+The scatter plot below depicts the relationship between Damage per Minute (DPM) and Team Kills per Minute (KPM) across the four tier-one leagues (LPL, LCK, LEC, and LCS). Points are color-coded by league, providing a visual comparison of team performance metrics. The plot reveals a clustering pattern: higher DPM values often correspond to higher KPM values, indicating more aggressive gameplay styles. Among the leagues, LPL exhibits a broader distribution in DPM and KPM, further emphasizing its action-packed gameplay dynamics compared to others.
 
 <iframe src="scatter_dpm_kpm.html" width="800" height="600" frameborder="0"></iframe>
 
-### Pivot Table
+### Interesting Aggregates
 
-This pivot table is directly relevant to the research question as it compares key metrics of “action-packed” gameplay—Damage Per Minute (DPM) and Kills Per Minute (KPM)—across the tier-one leagues (LCK, LCS, LEC, and LPL). The mean values provide insights into the average intensity of gameplay, while the maximum values highlight the potential for peak activity. Notably, the LPL leads in both mean KPM (0.84) and maximum KPM (1.90), indicating it consistently features the most high-energy and engaging games. This analysis supports the hypothesis that the LPL is the most action-packed league.
+This pivot table is directly relevant to the research question as it compares key metrics of “action-packed” gameplay—Damage Per Minute (DPM) and Kills Per Minute (KPM)—across the tier-one leagues (LCK, LCS, LEC, and LPL). The mean values provide insights into the average intensity of gameplay, while the maximum values highlight the potential for peak activity. Notably, the LPL leads in both mean KPM (0.84) and maximum KPM (1.90), indicating it consistently features the most high-energy and engaging games.
 
 |   ('mean', 'game dpm') |   ('mean', 'game kpm') |   ('max', 'game dpm') |   ('max', 'game kpm') |
 |-----------------------:|-----------------------:|----------------------:|----------------------:|
@@ -74,7 +74,7 @@ This pivot table is directly relevant to the research question as it compares ke
 
 # Assessment of Missingness
 
-The url column in the dataset is likely NMAR (Not Missing At Random) because the presence of a URL might depend on factors not captured in the dataset. For example, URLs may only be included for specific games or leagues that have partnerships with certain platforms or a higher level of media coverage. This missingness cannot be explained using other variables in the dataset, such as league or gameid.
+The url column in the dataset is likely NMAR because the presence of a URL might depend on factors not captured in the dataset. For example, URLs may only be included for specific games or leagues that have partnerships with certain platforms or a higher level of media coverage. This missingness cannot be explained using other variables in the dataset, such as league or gameid.
 
 This histogram visualizes the empirical distribution of Total Variation Distance (TVD) values generated from the permutation test. The red vertical line represents the observed TVD. The observed TVD lies significantly outside the range of permuted TVD values, suggesting strong evidence against the null hypothesis.
 <iframe src="empirical_distribution.html" width="800" height="600" frameborder="0"></iframe>
@@ -83,16 +83,16 @@ This bar graph shows the density of leagues when missing_url is True. It reveals
 <iframe src="true_missing.html" width="800" height="600" frameborder="0"></iframe>
 
 
-This bar graph vshows the density of leagues when missing_url is False. The LPL league dominates this distribution, showing that most non-missing URLs are from the LPL league.
+This bar graph shows the density of leagues when missing_url is False. The LPL league dominates this distribution, showing that most non-missing URLs are from the LPL league.
 <iframe src="false_missing.html" width="800" height="600" frameborder="0"></iframe>
 
 ### URL Missingness and League: MAR
 
-The results of the permutation test indicate that the missingness in the url column is significantly associated with the league column. A p-value of 0.0 suggests that the observed dependency is not due to random chance. This dependency supports the assumption that missingness is Missing at Random (MAR) because the likelihood of a missing url depends on the league, a known and observed variable. For instance, some leagues may systematically lack certain data due to differences in data collection practices or standards, which can explain the missingness without additional unknown factors.
+The results of the permutation test indicate that the missingness in the url column is significantly associated with the league column. A p-value of 0.0 suggests that the observed dependency is not due to random chance. This dependency supports the assumption that missingness is MAR because the likelihood of a missing url depends on the league, a known and observed variable. For instance, some leagues may systematically lack certain data due to differences in data collection practices or standards, which can explain the missingness without additional unknown factors.
 
 ### URL Missingness and Side: NMAR
 
-In contrast, the permutation test for the side column yields a p-value of 1.0, indicating no evidence of dependency between url missingness and side. This finding implies that the missingness in the url column is not influenced by the side column (e.g., Blue or Red). If the missingness cannot be fully explained by any observed variable, it is considered Not Missing at Random (NMAR). Additional investigation into unobserved factors or processes that could explain the missingness would be required to refine this assumption.
+In contrast, the permutation test for the side column yields a p-value of 1.0, indicating no evidence of dependency between url missingness and side. This finding implies that the missingness in the url column is not influenced by the side column (e.g., Blue or Red). If the missingness cannot be fully explained by any observed variable, it is considered NMAR. Additional investigation into unobserved factors or processes that could explain the missingness would be required to refine this assumption.
 
 
 # Hypothesis Testing
