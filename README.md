@@ -106,6 +106,48 @@ Since the p-value is less than the significance level of 0.05, we reject the nul
 
 # Baseline Model
 
+Model Description:
+
+The baseline model uses the k-Nearest Neighbors (k-NN) algorithm to predict the role (position) of players based on their in-game statistics. The following features are included:
+
+- Quantitative Features (16):
+- damagetochampions, dpm, damageshare, damagetakenperminute, wardsplaced, wpm, wardskilled, wcpm, controlwardsbought, visionscore, vspm, totalgold, earnedgold, earned gpm, earnedgoldshare, goldspent
+- Ordinal Features (0):
+- None.
+- Nominal Features (1):
+- position (target column)
+
+The position column (target) has been stratified during the train-test split to maintain proportional representation of each class. No explicit feature encoding was required as all features are numeric.
+
+Model Performance:
+
+- Accuracy: 60%
+- Precision, Recall, F1-Score (Class-Level):
+- bot: Precision = 0.49, Recall = 0.62, F1-Score = 0.55
+- jng: Precision = 0.69, Recall = 0.79, F1-Score = 0.73
+- mid: Precision = 0.40, Recall = 0.41, F1-Score = 0.40
+- sup: Precision = 0.95, Recall = 0.92, F1-Score = 0.93
+- top: Precision = 0.46, Recall = 0.28, F1-Score = 0.35
+
+Evaluation of Model Performance:
+
+- Strengths:
+- The model performs well for the support (sup) role, achieving an F1-score of 0.93. This may indicate that the features effectively differentiate this role from others.
+- High recall for the jng (jungle) role shows the model’s ability to identify this role in most cases.
+- Weaknesses:
+- The model struggles with the mid, bot, and top roles, especially top, which has a low recall of 0.28. This suggests the model frequently misclassifies players in the top role.
+- The overall accuracy of 60% is moderate but leaves room for improvement, indicating that the current feature set and algorithm may not fully capture the distinctions between player roles.
+
+Conclusion:
+
+While the model demonstrates some predictive capability, especially for the sup and jng roles, its performance is uneven across roles. The current accuracy of 60% suggests that the model is a reasonable starting point but not sufficient for robust role prediction. Improvements could be made by:
+
+- Adding more features to better capture role-specific behavior.
+- Exploring different algorithms, such as decision trees or ensemble methods.
+- Performing feature engineering, such as combining existing features or creating new derived metrics.
+
+This baseline model sets a foundation for further development and comparison with more advanced models.
+
 # Final Model
 
 # Fairness Analysis
