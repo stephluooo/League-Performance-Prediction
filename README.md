@@ -209,3 +209,31 @@ Analysis
 Future work could explore ensemble methods or feature engineering to improve performance further for positions like mid.
 
 # Fairness Analysis
+
+Groups and Evaluation Metric:
+
+- Group X: Players belonging to the LPL league (is_lpl = True).
+- Group Y: Players belonging to non-LPL leagues (is_lpl = False).
+- Evaluation Metric: Weighted precision score for classifying player positions.
+
+Null and Alternative Hypotheses:
+
+- Null Hypothesis (H₀): There is no significant difference in the weighted precision score for predicting positions between Group X (LPL players) and Group Y (non-LPL players). Any observed difference is due to random chance.
+- Alternative Hypothesis (H₁): There is a significant difference in the weighted precision score for predicting positions between Group X and Group Y.
+
+Choice of Test Statistic and Significance Level:
+
+- Test Statistic: Observed difference in weighted precision scores between Group X and Group Y.
+- Significance Level (α): 0.05.
+
+Permutation Test Results:
+
+- Observed Precision Difference: 0.0157.
+- p-value: 0.1300.
+
+Conclusion:
+Since the p-value (0.1300) is greater than the significance level (α = 0.05), we fail to reject the null hypothesis. This suggests that the observed precision difference between LPL and non-LPL groups is not statistically significant. Therefore, we cannot conclude that the model treats these groups differently in terms of precision for position classification. While there is a slight observed difference, it does not provide sufficient evidence to infer systematic bias.
+
+The weighted precision metric is appropriate for this task as it accounts for class imbalances, ensuring that the evaluation fairly reflects performance across all position categories. The permutation test is a robust choice for assessing the statistical significance of observed differences without making strong parametric assumptions.
+
+<iframe src="fig_fairness.html" width="800" height="600" frameborder="0"></iframe>
