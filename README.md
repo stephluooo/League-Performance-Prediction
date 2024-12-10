@@ -55,7 +55,7 @@ This histogram depicts the Kills Per Minute (KPM) distribution across games for 
 
 Bivariate Analysis: DPM vs. Team KPM by League
 
-The scatter plot below depicts the relationship between Damage per Minute (DPM) and Team Kills per Minute (KPM) across different leagues (LPL, LCK, LEC, and LCS). Points are color-coded by league, providing a visual comparison of team performance metrics. The plot reveals a clustering pattern: higher DPM values often correspond to higher KPM values, indicating more aggressive gameplay styles. Among the leagues, LPL exhibits a broader distribution in DPM and KPM, further emphasizing its fast-paced gameplay dynamics compared to others.
+The scatter plot below depicts the relationship between Damage per Minute (DPM) and Team Kills per Minute (KPM) across the four tier-one leagues (LPL, LCK, LEC, and LCS). Points are color-coded by league, providing a visual comparison of team performance metrics. The plot reveals a clustering pattern: higher DPM values often correspond to higher KPM values, indicating more aggressive gameplay styles. Among the leagues, LPL exhibits a broader distribution in DPM and KPM, further emphasizing its fast-paced gameplay dynamics compared to others.
 
 <iframe src="scatter_dpm_kpm.html" width="800" height="600" frameborder="0"></iframe>
 
