@@ -75,7 +75,14 @@ This pivot table is directly relevant to the research question as it compares ke
 
 The url column in the dataset is likely NMAR (Not Missing At Random) because the presence of a URL might depend on factors not captured in the dataset. For example, URLs may only be included for specific games or leagues that have partnerships with certain platforms or a higher level of media coverage. This missingness cannot be explained using other variables in the dataset, such as league or gameid.
 
-To transform this missingness to MAR (Missing At Random), additional data could be collected about factors influencing URL availability. For instance, knowing whether a game was broadcasted, the platform it was hosted on, or specific media agreements for the league could help explain the missingness of URLs in the dataset. This would allow the missingness to be conditionally independent of unobserved factors, making it MAR.
+URL Missingness and League: MAR
+
+The results of the permutation test indicate that the missingness in the url column is significantly associated with the league column. A p-value of 0.0 suggests that the observed dependency is not due to random chance. This dependency supports the assumption that missingness is Missing at Random (MAR) because the likelihood of a missing url depends on the league, a known and observed variable. For instance, some leagues may systematically lack certain data due to differences in data collection practices or standards, which can explain the missingness without additional unknown factors.
+
+URL Missingness and Side: NMAR
+
+In contrast, the permutation test for the side column yields a p-value of 1.0, indicating no evidence of dependency between url missingness and side. This finding implies that the missingness in the url column is not influenced by the side column (e.g., Blue or Red). If the missingness cannot be fully explained by any observed variable, it is considered Not Missing at Random (NMAR). Additional investigation into unobserved factors or processes that could explain the missingness would be required to refine this assumption.
+
 
 # Hypothesis Testing
 
@@ -86,4 +93,3 @@ To transform this missingness to MAR (Missing At Random), additional data could 
 # Final Model
 
 # Fairness Analysis
-hi from sophie
