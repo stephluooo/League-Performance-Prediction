@@ -75,11 +75,11 @@ This pivot table is directly relevant to the research question as it compares ke
 
 The url column in the dataset is likely NMAR (Not Missing At Random) because the presence of a URL might depend on factors not captured in the dataset. For example, URLs may only be included for specific games or leagues that have partnerships with certain platforms or a higher level of media coverage. This missingness cannot be explained using other variables in the dataset, such as league or gameid.
 
-URL Missingness and League: MAR
+### URL Missingness and League: MAR
 
 The results of the permutation test indicate that the missingness in the url column is significantly associated with the league column. A p-value of 0.0 suggests that the observed dependency is not due to random chance. This dependency supports the assumption that missingness is Missing at Random (MAR) because the likelihood of a missing url depends on the league, a known and observed variable. For instance, some leagues may systematically lack certain data due to differences in data collection practices or standards, which can explain the missingness without additional unknown factors.
 
-URL Missingness and Side: NMAR
+### URL Missingness and Side: NMAR
 
 In contrast, the permutation test for the side column yields a p-value of 1.0, indicating no evidence of dependency between url missingness and side. This finding implies that the missingness in the url column is not influenced by the side column (e.g., Blue or Red). If the missingness cannot be fully explained by any observed variable, it is considered Not Missing at Random (NMAR). Additional investigation into unobserved factors or processes that could explain the missingness would be required to refine this assumption.
 
@@ -149,8 +149,6 @@ While the model demonstrates some predictive capability, especially for the sup 
 This baseline model sets a foundation for further development and comparison with more advanced models.
 
 # Final Model
-
-Features
 
 The features used in the final model include:
 
