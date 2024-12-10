@@ -75,6 +75,16 @@ This pivot table is directly relevant to the research question as it compares ke
 
 The url column in the dataset is likely NMAR (Not Missing At Random) because the presence of a URL might depend on factors not captured in the dataset. For example, URLs may only be included for specific games or leagues that have partnerships with certain platforms or a higher level of media coverage. This missingness cannot be explained using other variables in the dataset, such as league or gameid.
 
+This histogram visualizes the empirical distribution of Total Variation Distance (TVD) values generated from the permutation test. The red vertical line represents the observed TVD. The observed TVD lies significantly outside the range of permuted TVD values, suggesting strong evidence against the null hypothesis.
+<iframe src="empirical_distribution.html" width="800" height="600" frameborder="0"></iframe>
+
+This bar graph shows the density of leagues when missing_url is True. It reveals that missing URLs are more prevalent in the LCK and LCS leagues, indicating potential systematic differences in data collection practices across leagues.
+<iframe src="true_missing.html" width="800" height="600" frameborder="0"></iframe>
+
+
+This bar graph visualizes the density of leagues when missing_url is False. The LPL league dominates this distribution, showing that most non-missing URLs are from the LPL league, highlighting an imbalance in data representation across leagues.
+<iframe src="false_missing.html" width="800" height="600" frameborder="0"></iframe>
+
 ### URL Missingness and League: MAR
 
 The results of the permutation test indicate that the missingness in the url column is significantly associated with the league column. A p-value of 0.0 suggests that the observed dependency is not due to random chance. This dependency supports the assumption that missingness is Missing at Random (MAR) because the likelihood of a missing url depends on the league, a known and observed variable. For instance, some leagues may systematically lack certain data due to differences in data collection practices or standards, which can explain the missingness without additional unknown factors.
