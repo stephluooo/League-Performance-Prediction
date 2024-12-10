@@ -73,6 +73,10 @@ This pivot table is directly relevant to the research question as it compares ke
 
 # Assessment of Missingness
 
+The url column in the dataset is likely NMAR (Not Missing At Random) because the presence of a URL might depend on factors not captured in the dataset. For example, URLs may only be included for specific games or leagues that have partnerships with certain platforms or a higher level of media coverage. This missingness cannot be explained using other variables in the dataset, such as league or gameid.
+
+To transform this missingness to MAR (Missing At Random), additional data could be collected about factors influencing URL availability. For instance, knowing whether a game was broadcasted, the platform it was hosted on, or specific media agreements for the league could help explain the missingness of URLs in the dataset. This would allow the missingness to be conditionally independent of unobserved factors, making it MAR.
+
 # Hypothesis Testing
 
 # Framing a Prediction Problem
