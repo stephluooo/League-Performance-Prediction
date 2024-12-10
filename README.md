@@ -51,8 +51,7 @@ Kills Per Minute (KPM) Distribution
 
 This histogram depicts the Kills Per Minute (KPM) distribution across games for each league. It illustrates how frequently kills occur during games. Most games cluster around a KPM of 0.5–1.0, with a small number of games exceeding 1.5 KPM. LPL again appears to have a slightly higher proportion of games with elevated KPM values, further emphasizing its high-paced gameplay.
 
-<iframe src="kpm_histogram.html" width="800" height="600"frameborder="0"></iframe>
-
+<iframe src="kpm_histogram.html" width="800" height="600" frameborder="0"></iframe>
 
 # Assessment of Missingness
 
