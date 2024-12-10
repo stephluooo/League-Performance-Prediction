@@ -45,13 +45,13 @@ Damage Per Minute (DPM) Distribution
 
 The histogram below shows the distribution of Damage Per Minute (DPM) across games, categorized by leagues (LCK, LPL, LEC, and LCS). It provides a visual representation of how “action-packed” games are in each league. Observing the plot, we see that most games cluster around a DPM of 3000–5000, indicating relatively high engagement. The LPL and LCS leagues show a slight skew towards higher DPM values, suggesting more action-packed gameplay compared to other leagues.
 
-<iframe src="kpm_histogram.html" width="800" height="600" frameborder="0"></iframe>
+<iframe src="dpm_histogram.html" width="800" height="600" frameborder="0"></iframe>
 
 Kills Per Minute (KPM) Distribution
 
 This histogram depicts the Kills Per Minute (KPM) distribution across games for each league. It illustrates how frequently kills occur during games. Most games cluster around a KPM of 0.5–1.0, with a small number of games exceeding 1.5 KPM. LPL again appears to have a slightly higher proportion of games with elevated KPM values, further emphasizing its high-paced gameplay.
 
-<iframe src="kpm2_histogram.html" width="800" height="600"frameborder="0"></iframe>
+<iframe src="kpm_histogram.html" width="800" height="600"frameborder="0"></iframe>
 
 
 # Assessment of Missingness
