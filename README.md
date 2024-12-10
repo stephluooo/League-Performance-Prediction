@@ -135,9 +135,9 @@ These features were selected because they provide a comprehensive representation
 
 ### Evaluation Metric
 
-The primary evaluation metric for the model is precision, as it is crucial to minimize the misclassification of players into incorrect roles, particularly in a competitive gaming context where such errors could have significant strategic implications. Precision is more appropriate than accuracy in this case because it focuses on the proportion of correctly predicted instances for each class relative to all predicted instances of that class.
+The primary evaluation metric for the model is **precision**, as it is crucial to minimize the misclassification of players into incorrect roles, particularly in a competitive gaming context where such errors could have significant strategic implications. Precision is more appropriate than accuracy in this case because it focuses on the proportion of correctly predicted instances for each class relative to all predicted instances of that class.
 
-#### Justification
+### Justification
 
 This problem was framed as a classification task due to the categorical nature of the target variable. The use of in-game metrics as features is justified by the strong association between these statistics and player roles. The selection of a K-Nearest Neighbors (KNN) model is appropriate for this problem because players occupying the same position are likely to exhibit similar performance patterns, forming distinct clusters in the feature space. The results of this classification task can provide valuable insights into player performance trends and can be utilized in competitive gaming analytics.
 
