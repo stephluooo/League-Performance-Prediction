@@ -1,6 +1,3 @@
-## League-Performance-Prediction
-A project for DSC80 at UCSD that explores performance prediction and fairness analysis in competitive gaming data.
-
 ## Introduction
 
 This project investigates the competitive dynamics of professional esports leagues, specifically focusing on tier-one leagues, namely the LPL, LCK, LEC, and LCS. The central question of our study is: Which tier-one league delivers the most “action-packed” games based on player performance statistics?
