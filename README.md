@@ -82,7 +82,7 @@ This bar graph shows the density of leagues when missing_url is True. It reveals
 <iframe src="true_missing.html" width="800" height="600" frameborder="0"></iframe>
 
 
-This bar graph vshows the density of leagues when missing_url is False. The LPL league dominates this distribution, showing that most non-missing URLs are from the LPL league, highlighting an imbalance in data representation across leagues.
+This bar graph vshows the density of leagues when missing_url is False. The LPL league dominates this distribution, showing that most non-missing URLs are from the LPL league.
 <iframe src="false_missing.html" width="800" height="600" frameborder="0"></iframe>
 
 ### URL Missingness and League: MAR
