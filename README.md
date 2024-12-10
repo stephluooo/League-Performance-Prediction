@@ -29,7 +29,13 @@ The initial dataset consisted of 150,180 rows and 161 columns, which included de
 
 The cleaned dataset, df_tier_one_filtered, now contains 1,802 rows and five columns. Below is the head of the cleaned dataset:
 
-<iframe src="tier_one_df.html" width="100%" height="400" frameborder="0"></iframe>
+| league   |   game kpm |   game dpm | url                                         | side   |
+|:---------|-----------:|-----------:|:--------------------------------------------|:-------|
+| LPL      |     0.8351 |    3099.03 | https://lpl.qq.com/es/stats.shtml?bmid=8401 | Blue   |
+| LPL      |     1.2465 |    3942.17 | https://lpl.qq.com/es/stats.shtml?bmid=8401 | Blue   |
+| LPL      |     0.6339 |    3251.22 | https://lpl.qq.com/es/stats.shtml?bmid=8402 | Blue   |
+| LPL      |     0.502  |    3568.48 | https://lpl.qq.com/es/stats.shtml?bmid=8402 | Blue   |
+| LPL      |     0.8526 |    3633.66 | https://lpl.qq.com/es/stats.shtml?bmid=8402 | Blue   |
 
 This process ensured that only meaningful and focused data was included, reducing noise and enhancing the analysis’s relevance.
 
