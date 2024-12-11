@@ -123,7 +123,7 @@ The TVD was used as the metric to quantify the difference between the distributi
 
 This histogram illustrates the empirical distribution of TVD values from the permutation test. The red vertical line represents the observed TVD for the original data. The observed TVD lying significantly outside the range of the permuted TVD values indicates strong evidence against the null hypothesis.
 
-<iframe src="empirical_side_distribution.html" width="800" height="600" frameborder="0"></iframe>
+<iframe src="empirical_tvd_side.html" width="800" height="600" frameborder="0"></iframe>
 The permutation test yielded an observed TVD of 0.0 and a p-value of 1.0. This result indicates no significant difference in the distribution of 'side' (Blue vs. Red) based on the missingness of the 'url' column. Therefore, we fail to reject the null hypothesis, suggesting that the missingness in the 'url' column is not dependent on the 'side' column.
 
 # Hypothesis Testing
