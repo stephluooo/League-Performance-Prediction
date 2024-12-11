@@ -269,7 +269,6 @@ The grid search evaluated these combinations using 5-fold cross-validation and s
 ### Final Model Performance
 
 - Accuracy: 0.78
-- Precision, Recall, F1-Score:
 - Best performance for sup position (F1: 0.98)
 - Lowest performance for mid position (F1: 0.57)
 - Moderate performance for bot, jng, and top.
