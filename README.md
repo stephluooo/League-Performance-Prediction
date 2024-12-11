@@ -5,7 +5,7 @@ A project for DSC80 at UCSD that explores performance prediction and fairness an
 
 As an esports enthusiast and a league player, we want to investigates the competitive dynamics of professional esports leagues for League of Legends, specifically focusing on tier-one leagues, LPL, LCK, LEC, and LCS. The central question of our study is: Which tier-one league delivers the most “action-packed” games based on player performance statistics?
 
-Our dataset comprises 18,020 rows and contains critical columns relevant to player performance and game metrics. These include:
+Our dataset comprises 150,180 rows and contains critical columns relevant to player performance and game metrics. These include:
 
 - league: The league in which the player on the team
 - position: The role of the player in the game (e.g., top, jungle, mid, bot, support).
@@ -25,7 +25,7 @@ The initial dataset consisted of 150,180 rows and 161 columns, which included de
 4. Aggregating Data: The data was grouped by gameid, and key metrics like team kpm and dpm were summed. The first instance of league, url, and side values within each game group was retained.
 5. Renaming Columns: Columns were renamed for clarity, such as changing team kpm to game kpm and dpm to game dpm.
 
-The cleaned dataset, df_tier_one_filtered, now contains 1,802 rows and five columns. Below is the head of the cleaned dataset:
+One of the cleaned dataset, now contains only game data and is reduced to a smaller data set of 1,802 rows and five columns. Below is the head of the cleaned dataset:
 
 | league   |   game kpm |   game dpm | url                                         | side   |
 |:---------|-----------:|-----------:|:--------------------------------------------|:-------|
@@ -41,21 +41,23 @@ This process ensured that only meaningful and focused data was included, reducin
 
 ### Damage Per Minute (DPM) Distribution
 
+The histogram below shows the distribution of Damage Per Minute (DPM) across all games. It has a Normal distribution like many real world data.
+
+<iframe src="dpm_histogram_uni.html" width="800" height="600" frameborder="0"></iframe>
+
+## Bivariate Analysis
+
+### Damage Per Minute (DPM) Distribution by League
+
 The histogram below shows the distribution of Damage Per Minute (DPM) across games, categorized by leagues (LCK, LPL, LEC, and LCS). It provides a visual representation of how “action-packed” games are in each league. Observing the plot, we see that most games cluster around a DPM of 3000–5000, indicating relatively high engagement. The LPL and LCS leagues show a slight skew towards higher DPM values, suggesting more action packed gameplay compared to other tier-one leagues.
 
 <iframe src="dpm_histogram.html" width="800" height="600" frameborder="0"></iframe>
 
-### Kills Per Minute (KPM) Distribution
+### Kills Per Minute (KPM) Distribution by League
 
 This histogram depicts the Kills Per Minute (KPM) distribution across games for each league. It illustrates how frequently kills occur during games. Most games cluster around a KPM of 0.5–1.0, with a small number of games exceeding 1.5 KPM. LPL again appears to have a slightly higher proportion of games with elevated KPM values, further emphasizing its high-paced gameplay.
 
 <iframe src="kpm_histogram.html" width="800" height="600" frameborder="0"></iframe>
-
-### Bivariate Analysis: DPM vs. Team KPM by League
-
-The scatter plot below depicts the relationship between Damage per Minute (DPM) and Team Kills per Minute (KPM) across the four tier-one leagues (LPL, LCK, LEC, and LCS). Points are color-coded by league, providing a visual comparison of team performance metrics. The plot reveals a clustering pattern: higher DPM values often correspond to higher KPM values, indicating more aggressive gameplay styles. Among the leagues, LPL exhibits a broader distribution in DPM and KPM, further emphasizing its action-packed gameplay dynamics compared to others.
-
-<iframe src="scatter_dpm_kpm.html" width="800" height="600" frameborder="0"></iframe>
 
 ### Interesting Aggregates
 
@@ -69,7 +71,7 @@ This pivot table is directly relevant to the research question as it compares ke
 |                4052.46 |               0.839326 |               6840.96 |                1.9029 |
 
 
-# Assessment of Missingness
+# Assessment of Missingness I
 
 The 'url' column in the dataset is likely **NMAR** because the presence of a URL might depend on factors not captured in the dataset. For example, URLs may only be included for specific games or leagues that have partnerships with certain platforms or a higher level of media coverage. This missingness cannot be explained using other variables in the dataset, such as league or gameid.
 
@@ -85,7 +87,7 @@ This bar graph shows the density of leagues when missing_url is False. The LPL l
 
 ### Hypothesis:
 
-Null Hypothesis (H₀): The distribution of leagues when the url column is missing is the same as the distribution of leagues when the url column is not missing.
+Null Hypothesis (H₀): The distribution of leagues when the url column is missing is the same as the distribution of leagues when the url column is not missing.\
 Alternative Hypothesis (H₁): The distribution of leagues when the url column is missing is different from the distribution of leagues when the url column is not missing.
 
 ### Test Statistic:
@@ -103,6 +105,26 @@ The permutation test yielded a p-value close to 0, indicating that the observed 
 
 This result suggests that the missingness of the url column is not entirely random. Instead, the url column demonstrates a **Missing at Random (MAR)** relationship with the league column. This implies that the likelihood of a url being missing depends on the associated league.
 
+# Assessment of Missingness II
+
+Additionally, the 'url' column could also be **MAR** dependent on the 'side' column due to the structure of the data collection process. Specifically, if only one URL is attached to all rows corresponding to the same game, and the 'Blue' side rows consistently appear before the 'Red' side rows in the dataset for each game, then the 'Blue' side rows are more likely to have a non-missing URL. This systematic ordering could lead to a higher likelihood of missing URLs for the 'Red' side rows, making the missingness in the 'url' column conditionally dependent on the 'side' column.
+
+### Hypothesis:
+
+Null Hypothesis (H₀): The distribution of 'side' (Blue vs. Red) when the 'url' column is missing is the same as when it is not missing.
+Alternative Hypothesis (H₁): The distribution of 'side' (Blue vs. Red) differs based on the missingness of the 'url' column.
+
+### Test Statistic:
+
+Test Statistic: Total Variation Distance (TVD)
+Significance Level (α): 0.05
+
+The TVD was used as the metric to quantify the difference between the distributions of 'side' (Blue vs. Red) when the 'url' column is missing versus when it is not missing. A permutation test with 1,000 permutations was conducted to calculate the empirical distribution of TVD under the null hypothesis.
+
+This histogram illustrates the empirical distribution of TVD values from the permutation test. The red vertical line represents the observed TVD for the original data. The observed TVD lying significantly outside the range of the permuted TVD values indicates strong evidence against the null hypothesis.
+
+<iframe src="empirical_side_distribution.html" width="800" height="600" frameborder="0"></iframe>
+The permutation test yielded an observed TVD of 0.0 and a p-value of 1.0. This result indicates no significant difference in the distribution of 'side' (Blue vs. Red) based on the missingness of the 'url' column. Therefore, we fail to reject the null hypothesis, suggesting that the missingness in the 'url' column is not dependent on the 'side' column.
 
 # Hypothesis Testing
 
@@ -296,4 +318,4 @@ Since the p-value (0.1300) is greater than the significance level (α = 0.05), w
 
 The weighted precision metric is appropriate for this task as it accounts for class imbalances, ensuring that the evaluation fairly reflects performance across all position categories. The permutation test is a robust choice for assessing the statistical significance of observed differences without making strong parametric assumptions.
 
-<iframe src="fig_fairness.html" width="800" height="600" frameborder="0"></iframe>
+<iframe src="hypothesis_test_distribution.html" width="800" height="600" frameborder="0"></iframe>
